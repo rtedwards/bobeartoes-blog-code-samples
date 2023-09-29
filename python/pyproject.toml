@@ -1,0 +1,81 @@
+[tool.coverage.run]
+source = []
+
+[tool.mypy]
+exclude = []
+
+
+[tool.black]
+line-length = 120
+target-version = ['py311']
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+    | \.hg
+    | \.mypy_cache
+    | \.tox
+    | \.venv
+    | _build
+    | buck-out
+    | build
+    | dist
+
+    # The following are specific to Black, you probably don't want those.
+    | blib2to3
+    | tests/data
+)/
+'''
+
+[tool.isort]
+profile = "black"
+py_version = "311"
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+line_length = 120
+src_paths = ["./notebooks"]
+skip_glob = ["ci/cache"]
+
+
+[tool.pylint.'MAIN']
+jobs = 0       # use all cores
+fail-under = 9
+
+[tool.pylint.'MESSAGES CONTROL']
+max-line-length = 120
+
+disable = [
+  "C0116", # missing-docstring
+]
+
+[tool.poetry]
+name = "python-code-samples"
+version = "0.0.0"
+description = "Python code samples from blog"
+authors = [
+  "Robert Edwards <rtedwards.eng@gmail.com>",
+]
+readme = "README.md"
+# homepage = ""
+repository = "https://github.com/rtedwards/bobeartoes-blog-code-samples"
+# documentation = ""
+# include = []
+# packages = [{ include = "" }]
+
+[tool.poetry.dependencies]
+python = "^3.11.4"
+pandas = "^2.0.1"
+jupyterlab = "^4.0.3"
+altair = "^5.0.1"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.7.0"
+flake8 = "^6.0.0"
+isort = "^5.12.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
